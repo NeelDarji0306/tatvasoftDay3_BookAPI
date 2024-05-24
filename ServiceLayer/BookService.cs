@@ -1,4 +1,6 @@
-﻿using ServiceLayer.Model;
+﻿using DataLayer;
+using DataLayer.Entity;
+using ServiceLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +53,34 @@ namespace ServiceLayer
                 return book;
             }
             return null;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // day 4
+        private readonly BookRepository _bookRepository;
+        public BookService(BookRepository bookRepository)
+        {
+            _bookRepository = bookRepository; 
+        }
+
+        public async Task InsertBookDetais(BookDetails bookDetails)
+        {
+            await _bookRepository.InsertBook(bookDetails);
+        }
+        public BookDetails GetBookDetailsById(int id)
+        {
+            return _bookRepository.GetBookDetailsById(id);
         }
 
     }

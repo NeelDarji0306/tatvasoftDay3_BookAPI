@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataLayer.Entity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;// using reference of ServiceLayer bcz that is different project.
 using ServiceLayer.Model;         
@@ -83,6 +84,42 @@ namespace BookAPI.Controllers
                 return StatusCode(500);
             }
             return Ok("Book data Deleted Successfully of bookId : " + id);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // day 4
+        [HttpPost("BookDetails")]
+        public async Task<IActionResult> InsertBookDetails(BookDetails bookDetails)
+        {
+            await _bookService.InsertBookDetais(bookDetails);
+            //return Ok();
+            return CreatedAtAction(nameof(InsertBookDetails),bookDetails);
+        }
+
+        [HttpGet("BookDetails/{id}")]
+        public IActionResult GetBookDetailsById(int id)
+        {
+            var book = _bookService.GetBookDetailsById(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return Ok(book);
         }
     }
 }
