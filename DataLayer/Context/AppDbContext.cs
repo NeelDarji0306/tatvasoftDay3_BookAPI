@@ -14,5 +14,6 @@ namespace DataLayer.Context
         {
         }
         public DbSet<BookDetails> BookDetails { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

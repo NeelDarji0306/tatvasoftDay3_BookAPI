@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;// using reference of ServiceLayer bcz that is different project.
@@ -18,7 +19,7 @@ namespace BookAPI.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult GetAllBooks()
         {
             var result = _bookService.GetAllBooks();
@@ -85,6 +86,7 @@ namespace BookAPI.Controllers
             }
             return Ok("Book data Deleted Successfully of bookId : " + id);
         }
+        */
 
 
 
@@ -103,14 +105,15 @@ namespace BookAPI.Controllers
 
 
         // day 4
+        [Authorize(Roles = "Admin")]
         [HttpPost("BookDetails")]
         public async Task<IActionResult> InsertBookDetails(BookDetails bookDetails)
         {
-            await _bookService.InsertBookDetais(bookDetails);
+            await _bookService.InsertBookDetails(bookDetails);
             //return Ok();
             return CreatedAtAction(nameof(InsertBookDetails),bookDetails);
         }
-
+        [Authorize]
         [HttpGet("BookDetails/{id}")]
         public IActionResult GetBookDetailsById(int id)
         {

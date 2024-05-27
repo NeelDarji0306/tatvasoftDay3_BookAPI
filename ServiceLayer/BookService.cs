@@ -74,7 +74,7 @@ namespace ServiceLayer
             _bookRepository = bookRepository; 
         }
 
-        public async Task InsertBookDetais(BookDetails bookDetails)
+        public async Task InsertBookDetails(BookDetails bookDetails)
         {
             await _bookRepository.InsertBook(bookDetails);
         }
